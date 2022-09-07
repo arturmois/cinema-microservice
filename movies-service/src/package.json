@@ -4,8 +4,8 @@
   "description": "Provide movies info.",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "test": "jest"
+    "start": "node -r dotenv/config index",
+    "test": "jest --detectOpenHandles"
   },
   "author": "ArturMoises",
   "license": "ISC",
