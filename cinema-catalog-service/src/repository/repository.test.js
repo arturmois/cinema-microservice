@@ -7,12 +7,12 @@ let cityId = null;
 beforeAll(async () => {
     const cities = await repository.getAllCities();
     cityId = cities[0]._id;
-})
+});
 
 afterAll(async () => {
     await database.disconnect();
     await database.disconnect();
-})
+});
 
 test('getAllCities', async () => {
     const cities = await repository.getAllCities();
