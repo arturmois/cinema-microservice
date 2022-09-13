@@ -1,4 +1,5 @@
 data
-logs
+coverage
 node_modules
 .env
+logs
