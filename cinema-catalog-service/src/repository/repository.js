@@ -7,7 +7,7 @@ async function getAllCities() {
         .find({})
         .project({ cidade: 1, uf: 1, pais: 1 })
         .toArray();
-};
+}
 
 async function getCinemasByCityId(cityId) {
     const objCityId = new ObjectId(cityId);
@@ -19,4 +19,4 @@ async function getCinemasByCityId(cityId) {
 module.exports = {
     getAllCities,
     getCinemasByCityId
-};
+}
