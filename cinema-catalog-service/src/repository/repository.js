@@ -33,10 +33,10 @@ async function getMoviesByCinemaId(cinemaId) {
 }
 
 async function getMoviesByCityId(cityId) {
-    const objcityId = new ObjectId(cityId);
+    const objCityId = new ObjectId(cityId);
     const db = await database.connect();
     const group = await db.collection('cinemaCatalog').aggregate([
-        { $match: { "_id": objcityId } },
+        { $match: { "_id": objCityId } },
         { $unwind: "$cinemas" },
         { $unwind: "$cinemas.salas" },
         { $unwind: "$cinemas.salas.sessoes" },
@@ -46,16 +46,43 @@ async function getMoviesByCityId(cityId) {
     return group.map(g => g._id);
 }
 
-async function getMoviesSessionsByCityId(movieId, cityId) {
-    const objcityId = new ObjectId(cityId);
-    const objmovieId = new ObjectId(movieId);
+async function getMoviesSessionsByCityId(cityId, movieId) {
+    const objCityId = new ObjectId(cityId);
+    const objMovieId = new ObjectId(movieId);
     const db = await database.connect();
     const group = await db.collection('cinemaCatalog').aggregate([
-        { $match: { "_id": objcityId } },
+        { $match: { "_id": objCityId } },
         { $unwind: "$cinemas" },
         { $unwind: "$cinemas.salas" },
         { $unwind: "$cinemas.salas.sessoes" },
-        { $match: { "cinemas.salas.sessoes.idFilme": objmovieId } },
+        { $match: { "cinemas.salas.sessoes.idFilme": objMovieId } },
+        {
+            $group: {
+                _id: {
+                    titulo: "$cinemas.salas.sessoes.filme",
+                    _id: "$cinemas.salas.sessoes.idFilme",
+                    cinema: "$cinemas.nome",
+                    idCinema: "$cinemas._id",
+                    sala: "$cinemas.salas.nome",
+                    sessao: "$cinemas.salas.sessoes"
+                }
+            }
+        }
+    ]).toArray();
+
+    return group.map(g => g._id);
+}
+
+async function getMoviesSessionsByCinemaId(cinemaId, movieId) {
+    const objCinemaId = new ObjectId(cinemaId);
+    const objMovieId = new ObjectId(movieId);
+    const db = await database.connect();
+    const group = await db.collection('cinemaCatalog').aggregate([
+        { $match: { "cinemas._id": objCinemaId } },
+        { $unwind: "$cinemas" },
+        { $unwind: "$cinemas.salas" },
+        { $unwind: "$cinemas.salas.sessoes" },
+        { $match: { "cinemas.salas.sessoes.idFilme": objMovieId } },
         {
             $group: {
                 _id: {
@@ -74,11 +101,11 @@ async function getMoviesSessionsByCityId(movieId, cityId) {
 }
 
 
-
 module.exports = {
     getAllCities,
     getCinemasByCityId,
     getMoviesByCinemaId,
     getMoviesByCityId,
-    getMoviesSessionsByCityId
+    getMoviesSessionsByCityId,
+    getMoviesSessionsByCinemaId
 }
