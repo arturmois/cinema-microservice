@@ -32,8 +32,53 @@ async function getMoviesByCinemaId(cinemaId) {
     return group.map(g => g._id);
 }
 
+async function getMoviesByCityId(cityId) {
+    const objcityId = new ObjectId(cityId);
+    const db = await database.connect();
+    const group = await db.collection('cinemaCatalog').aggregate([
+        { $match: { "_id": objcityId } },
+        { $unwind: "$cinemas" },
+        { $unwind: "$cinemas.salas" },
+        { $unwind: "$cinemas.salas.sessoes" },
+        { $group: { _id: { titulo: "$cinemas.salas.sessoes.filme", _id: "$cinemas.salas.sessoes.idFilme" } } }
+    ]).toArray();
+
+    return group.map(g => g._id);
+}
+
+async function getMoviesSessionsByCityId(movieId, cityId) {
+    const objcityId = new ObjectId(cityId);
+    const objmovieId = new ObjectId(movieId);
+    const db = await database.connect();
+    const group = await db.collection('cinemaCatalog').aggregate([
+        { $match: { "_id": objcityId } },
+        { $unwind: "$cinemas" },
+        { $unwind: "$cinemas.salas" },
+        { $unwind: "$cinemas.salas.sessoes" },
+        { $match: { "cinemas.salas.sessoes.idFilme": objmovieId } },
+        {
+            $group: {
+                _id: {
+                    titulo: "$cinemas.salas.sessoes.filme",
+                    _id: "$cinemas.salas.sessoes.idFilme",
+                    cinema: "$cinemas.nome",
+                    idCinema: "$cinemas._id",
+                    sala: "$cinemas.salas.nome",
+                    sessao: "$cinemas.salas.sessoes"
+                }
+            }
+        }
+    ]).toArray();
+
+    return group.map(g => g._id);
+}
+
+
+
 module.exports = {
     getAllCities,
     getCinemasByCityId,
-    getMoviesByCinemaId
+    getMoviesByCinemaId,
+    getMoviesByCityId,
+    getMoviesSessionsByCityId
 }
