@@ -46,9 +46,10 @@ async function getMoviesByCityId(cityId) {
     return group.map(g => g._id);
 }
 
-async function getMoviesSessionsByCityId(cityId, movieId) {
+async function getMovieSessionsByCityId(movieId, cityId) {
     const objCityId = new ObjectId(cityId);
     const objMovieId = new ObjectId(movieId);
+
     const db = await database.connect();
     const group = await db.collection('cinemaCatalog').aggregate([
         { $match: { "_id": objCityId } },
@@ -69,13 +70,13 @@ async function getMoviesSessionsByCityId(cityId, movieId) {
             }
         }
     ]).toArray();
-
     return group.map(g => g._id);
 }
 
-async function getMoviesSessionsByCinemaId(cinemaId, movieId) {
+async function getMovieSessionsByCinemaId(movieId, cinemaId) {
     const objCinemaId = new ObjectId(cinemaId);
     const objMovieId = new ObjectId(movieId);
+
     const db = await database.connect();
     const group = await db.collection('cinemaCatalog').aggregate([
         { $match: { "cinemas._id": objCinemaId } },
@@ -96,16 +97,14 @@ async function getMoviesSessionsByCinemaId(cinemaId, movieId) {
             }
         }
     ]).toArray();
-
     return group.map(g => g._id);
 }
-
 
 module.exports = {
     getAllCities,
     getCinemasByCityId,
     getMoviesByCinemaId,
     getMoviesByCityId,
-    getMoviesSessionsByCityId,
-    getMoviesSessionsByCinemaId
+    getMovieSessionsByCityId,
+    getMovieSessionsByCinemaId
 }

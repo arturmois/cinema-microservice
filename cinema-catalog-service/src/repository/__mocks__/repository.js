@@ -15,7 +15,7 @@ const cinemaCatalog = [{
             nome: 1,
             sessoes: [{
                 data: new Date("2021-03-01T09:00:00Z"),
-                idFilme: "6316aecda440e1b785b502fe",
+                idFilme: "605e57238ed0562b5da2f87d",
                 filme: "Vingadores: Guerra Infinita",
                 valor: 25.00,
                 assentos: [{
@@ -39,7 +39,7 @@ const cinemaCatalog = [{
                 },]
             }, {
                 data: new Date("2021-06-01T13:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b502ff"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87e"),
                 filme: "Vingadores: Era de Ultron",
                 valor: 20.00,
                 assentos: [{
@@ -57,7 +57,7 @@ const cinemaCatalog = [{
             nome: 2,
             sessoes: [{
                 data: new Date("2021-03-01T09:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b502ff"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87e"),
                 filme: "Vingadores: Era de Ultron",
                 valor: 25.00,
                 assentos: [{
@@ -69,7 +69,7 @@ const cinemaCatalog = [{
                 },]
             }, {
                 data: new Date("2021-03-01T11:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b50300"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87c"),
                 filme: "Vingadores: Ultimato",
                 valor: 25.00,
                 assentos: [{
@@ -81,7 +81,7 @@ const cinemaCatalog = [{
                 },]
             }, {
                 data: new Date("2021-03-01T13:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b50300"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87c"),
                 filme: "Vingadores: Ultimato",
                 valor: 20.00,
                 assentos: [{
@@ -103,7 +103,7 @@ const cinemaCatalog = [{
             nome: 100,
             sessoes: [{
                 data: new Date("2021-03-30T19:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b50300"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87c"),
                 filme: "Vingadores: Ultimato",
                 valor: 25.00,
                 assentos: [{
@@ -115,7 +115,7 @@ const cinemaCatalog = [{
                 },]
             }, {
                 data: new Date("2021-03-30T11:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b50300"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87c"),
                 filme: "Vingadores: Ultimato",
                 valor: 25.00,
                 assentos: [{
@@ -127,7 +127,7 @@ const cinemaCatalog = [{
                 },]
             }, {
                 data: new Date("2021-03-30T13:00:00Z"),
-                idFilme: new ObjectId("6316aecda440e1b785b502ff"),
+                idFilme: new ObjectId("605e57238ed0562b5da2f87e"),
                 filme: "Vingadores: Era de Ultron",
                 valor: 20.00,
                 assentos: [{
