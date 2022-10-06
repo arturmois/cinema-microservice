@@ -34,9 +34,9 @@ module.exports = (app, repository) => {
 
     })
 
-    // app.delete('/movies/:id', async (req, res, next) => {
-    //     const id = req.params.id;
-    //     const result = await repository.deleteMovie(id);
-    //     res.sendStatus(204);
-    // })
+    app.delete('/movies/:id', async (req, res, next) => {
+        const id = req.params.id;
+        const result = await repository.deleteMovie(id);
+        res.sendStatus(204);
+    })
 }

@@ -47,23 +47,22 @@ test('addMovie', async () => {
     }
 
     const result = await repository.addMovie(movie);
-    console.log(result);
     expect(result).toBeTruthy;
 
 })
 
-// test('deleteMovie', async () => {
-//     const movie = {
-//         titulo: 'Test Movie',
-//         sinopse: 'Movie Sumary',
-//         duracao: 120,
-//         dataLancamento: new Date(),
-//         imagem: 'image.jpg',
-//         categorias: ['Aventura']
-//     }
+test('deleteMovie', async () => {
+    const movie = {
+        titulo: 'Test Movie',
+        sinopse: 'Movie Sumary',
+        duracao: 120,
+        dataLancamento: new Date(),
+        imagem: 'image.jpg',
+        categorias: ['Aventura']
+    }
 
-//     const result = await repository.addMovie(movie);
-//     const result2 = await repository.deleteMovie(result._id);
-//     expect(result2).toBeTruthy();
+    const result = await repository.addMovie(movie);
+    const result2 = await repository.deleteMovie(result._id);
+    expect(result2).toBeTruthy();
 
-// })
+})

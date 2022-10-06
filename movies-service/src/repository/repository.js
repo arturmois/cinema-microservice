@@ -24,14 +24,15 @@ async function addMovie(movie) {
     return db.collection('movies').insertOne(movie);
 }
 
-// async function deleteMovie(id) {
-//     const db = await database.connect();
-//     return db.collection('movies').deleteOne({ _id: new ObjectId(id) });
-// }
+async function deleteMovie(id) {
+    const db = await database.connect();
+    return db.collection('movies').deleteOne({ _id: new ObjectId(id) });
+}
 
 module.exports = {
     getAllMovies,
     getMovieById,
     getMoviePremieres,
-    addMovie
+    addMovie,
+    deleteMovie
 };
