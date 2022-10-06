@@ -50,7 +50,7 @@ test('POST /movies/ 201 OK', async () => {
         dataLancamento: new Date(),
         imagem: 'image.jpg',
         categorias: ['Aventura']
-    }
+    };
 
     const response = await request(app)
         .post('/movies/')
@@ -61,7 +61,7 @@ test('POST /movies/ 201 OK', async () => {
     expect(response.body).toBeTruthy();
 })
 
-test('DELETE /movies/:id 204 OK', async () => {
-    const response = await request(app).delete('/movies/1');
-    expect(response.status).toEqual(204);
-})
+// test('DELETE /movies/:id 204 OK', async () => {
+//     const response = await request(app).delete('/movies/1');
+//     expect(response.status).toEqual(204);
+// })
