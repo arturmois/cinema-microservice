@@ -65,10 +65,9 @@ async function addMovie(movie) {
 }
 
 async function deleteMovie(id) {
-    if (!id) throw new Error('Não foi possível excluir este filme!');
+    if (!id) throw new Error('Não foi possível excluir esse filme!')
     return true;
 }
-
 module.exports = {
     getAllMovies,
     getMovieById,
