@@ -39,16 +39,22 @@ test('GetMoviePremieres', async () => {
 test('addMovie', async () => {
     const movie = {
         titulo: 'Test Movie',
-        sinopse: 'Movie Sumary',
+        sinopse: 'Movie Summary',
         duracao: 120,
         dataLancamento: new Date(),
         imagem: 'image.jpg',
         categorias: ['Aventura']
+    };
+
+    let result;
+
+    try {
+        result = await repository.addMovie(movie);
+        expect(result).toBeTruthy();
+    } finally {
+        if (result)
+            await repository.deleteMovie(result._id);
     }
-
-    const result = await repository.addMovie(movie);
-    expect(result).toBeTruthy;
-
 })
 
 test('deleteMovie', async () => {
@@ -64,5 +70,4 @@ test('deleteMovie', async () => {
     const result = await repository.addMovie(movie);
     const result2 = await repository.deleteMovie(result._id);
     expect(result2).toBeTruthy();
-
 })

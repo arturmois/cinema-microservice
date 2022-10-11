@@ -1,6 +1,8 @@
 const database = require('../config/database');
 const { ObjectId } = require('mongodb');
 
+
+
 async function getAllMovies() {
     const db = await database.connect();
     return db.collection('movies').find().toArray();
@@ -21,7 +23,9 @@ async function getMoviePremieres() {
 
 async function addMovie(movie) {
     const db = await database.connect();
-    return db.collection('movies').insertOne(movie);
+    const result = await db.collection('movies').insertOne(movie);
+    movie._id = result.insertedId;
+    return movie;
 }
 
 async function deleteMovie(id) {

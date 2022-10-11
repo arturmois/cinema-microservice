@@ -48,7 +48,7 @@ test('POST /movies/ 201 OK', async () => {
         sinopse: 'Movie Sumary',
         duracao: 120,
         dataLancamento: new Date(),
-        imagem: 'image.jpg',
+        imagem: 'http://image.jpg',
         categorias: ['Aventura']
     };
 
@@ -61,7 +61,18 @@ test('POST /movies/ 201 OK', async () => {
     expect(response.body).toBeTruthy();
 })
 
-test('DELETE /movies/:id 204 OK', async () => {
+test('POST /movies/ 422 UNPROCESSABLE ENTITY', async () => {
+    const movie = {};
+
+    const response = await request(app)
+        .post('/movies/')
+        .set('Content-Type', 'application/json')
+        .send(movie);
+
+    expect(response.status).toEqual(422);
+})
+
+test('DELETE /movies/:id 204 NO CONTENT', async () => {
     const response = await request(app).delete('/movies/1');
     expect(response.status).toEqual(204);
 })

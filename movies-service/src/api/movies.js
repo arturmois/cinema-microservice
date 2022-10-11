@@ -1,9 +1,9 @@
+const validationMiddleware = require('../middlewares/validationMiddleware');
+
 module.exports = (app, repository) => {
 
     app.get('/movies/premieres', async (req, res, next) => {
         const movies = await repository.getMoviePremieres();
-        if (!movies || !movies.length) return res.sendStatus(404);
-
         res.json(movies);
     })
 
@@ -16,12 +16,10 @@ module.exports = (app, repository) => {
 
     app.get('/movies', async (req, res, next) => {
         const movies = await repository.getAllMovies();
-        if (!movies || !movies.length) return res.sendStatus(404);
-
         res.json(movies);
     })
 
-    app.post('/movies', async (req, res, next) => {
+    app.post('/movies', validationMiddleware.validateMovie, async (req, res, next) => {
         const titulo = req.body.titulo;
         const sinopse = req.body.sinopse;
         const duracao = parseInt(req.body.duracao);
@@ -38,5 +36,6 @@ module.exports = (app, repository) => {
         const id = req.params.id;
         const result = await repository.deleteMovie(id);
         res.sendStatus(204);
+
     })
 }

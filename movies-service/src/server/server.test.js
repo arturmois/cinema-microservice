@@ -14,7 +14,7 @@ test('Server Start', async () => {
 });
 
 test('Health Check', async () => {
-    process.env.PORT = 3001;
+    process.env.PORT = 3004;
     const app = await server.start(apiMock);
     const response = await request(app).get('/health');
     expect(response.status).toEqual(200);
@@ -28,6 +28,6 @@ test('Error Check', async () => {
 });
 
 test('Server Stop', async () => {
-    const isStopped = await server.stop;
+    const isStopped = await server.stop();
     expect(isStopped).toBeTruthy();
 });
