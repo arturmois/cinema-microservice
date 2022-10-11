@@ -1,1 +1,0 @@
-{"level":"error","message":"MongoServerSelectionError: connect ECONNREFUSED 127.0.0.1:27018\n    at Timeout._onTimeout (C:\\Users\\artur\\Projects\\cinema-microservice\\cinema-catalog-service\\src\\node_modules\\mongodb\\lib\\sdam\\topology.js:293:38)\n    at listOnTimeout (node:internal/timers:559:17)\n    at processTimers (node:internal/timers:502:7)"}
