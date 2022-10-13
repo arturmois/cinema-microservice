@@ -3,7 +3,7 @@ const httpProxy = require('express-http-proxy');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const authController = require('./authController');
+const authController = require('../controllers/authController');
 
 const app = express();
 
@@ -19,6 +19,8 @@ const options = {
 }
 
 app.post('/login', authController.doLogin);
+
+app.use('*', authController.validateBlacklist);
 
 app.post('/logout', authController.validadeToken, authController.doLogout);
 

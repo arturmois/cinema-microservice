@@ -10,6 +10,10 @@ const logger = winston.createLogger({
         new winston.transports.File({
             filename: path.join(__dirname, '..', 'logs', 'error.log'),
             level: 'error'
+        }),
+        new winston.transports.File({
+            filename: path.join(__dirname, '..', 'logs', 'info.log'),
+            level: 'info'
         })
     ]
 })
