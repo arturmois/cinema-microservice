@@ -18,7 +18,7 @@ const options = {
     }
 }
 
-app.post('/login', authController.doLogin);
+app.post('/login', authController.validadeLoginSchema, authController.doLogin);
 
 app.use('*', authController.validateBlacklist);
 
@@ -31,6 +31,8 @@ app.use('/movies', moviesServiceProxy);
 
 app.get(/cities|cinemas/i, catalogServiceProxy);
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
     console.log(`API Gateway started at ${process.env.PORT}`);
 })
+
+module.exports = server;

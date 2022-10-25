@@ -1,8 +1,6 @@
 const database = require('../config/database');
 const { ObjectId } = require('mongodb');
 
-
-
 async function getAllMovies() {
     const db = await database.connect();
     return db.collection('movies').find().toArray();
@@ -33,10 +31,4 @@ async function deleteMovie(id) {
     return db.collection('movies').deleteOne({ _id: new ObjectId(id) });
 }
 
-module.exports = {
-    getAllMovies,
-    getMovieById,
-    getMoviePremieres,
-    addMovie,
-    deleteMovie
-};
+module.exports = { getAllMovies, getMovieById, getMoviePremieres, addMovie, deleteMovie }

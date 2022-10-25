@@ -32,6 +32,17 @@ async function validateBlacklist(req, res, next) {
         next();
 }
 
+async function validadeLoginSchema(req, res, next) {
+    const schema = require('../schemas/login');
+    const { error } = schema.validate(req.body);
+    if (error) {
+        const { details } = error;
+        return res.status(422).json(details.map(d => d.message));
+    }
+
+    next();
+}
+
 async function validadeToken(req, res, next) {
     let token = req.headers['authorization'];
     if (!token) return res.sendStatus(401);
@@ -61,5 +72,6 @@ module.exports = {
     doLogin,
     doLogout,
     validadeToken,
-    validateBlacklist
+    validateBlacklist,
+    validadeLoginSchema
 }

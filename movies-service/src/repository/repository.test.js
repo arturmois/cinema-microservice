@@ -1,6 +1,5 @@
 const { test, expect, beforeAll } = require('@jest/globals');
 const repository = require('./repository');
-const database = require('../config/database');
 
 let testMovieId = null;
 
@@ -9,28 +8,24 @@ beforeAll(async () => {
     testMovieId = movies[0]._id;
 })
 
-afterAll(async () => {
-    await database.disconnect();
-    await database.disconnect();
-})
-
-test('GetAllMovies', async () => {
+test('getAllMovies', async () => {
     const movies = await repository.getAllMovies();
     expect(Array.isArray(movies)).toBeTruthy();
     expect(movies.length).toBeTruthy();
 })
 
-test('GetMovieById', async () => {
+test('getMovieById', async () => {
     const movie = await repository.getMovieById(testMovieId);
     expect(movie).toBeTruthy();
     expect(movie._id).toEqual(testMovieId);
 })
 
-test('GetMoviePremieres', async () => {
+test('getMoviePremieres', async () => {
     const monthAgo = new Date();
     monthAgo.setMonth(-1);
 
     const movies = await repository.getMoviePremieres();
+    console.log(movies);
     expect(Array.isArray(movies)).toBeTruthy();
     expect(movies.length).toBeTruthy();
     expect(movies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
@@ -60,12 +55,12 @@ test('addMovie', async () => {
 test('deleteMovie', async () => {
     const movie = {
         titulo: 'Test Movie',
-        sinopse: 'Movie Sumary',
+        sinopse: 'Movie Summary',
         duracao: 120,
         dataLancamento: new Date(),
         imagem: 'image.jpg',
         categorias: ['Aventura']
-    }
+    };
 
     const result = await repository.addMovie(movie);
     const result2 = await repository.deleteMovie(result._id);

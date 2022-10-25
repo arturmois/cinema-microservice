@@ -11,6 +11,7 @@ async function start(api, repository) {
 
     app.use(helmet());
     app.use(morgan('dev'));
+    app.use(express.json());
 
     app.get('/health', (req, res, next) => {
         res.send(`The service ${process.env.MS_NAME} is running at ${process.env.PORT}`);
@@ -35,7 +36,4 @@ async function stop() {
     return true;
 }
 
-module.exports = {
-    start,
-    stop
-}
+module.exports = { start, stop }
